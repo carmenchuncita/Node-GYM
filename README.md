@@ -13,3 +13,12 @@ Node-GYM
 - npm install multer-storage-cloudinary
 
 2. npm run dev
+
+3. User example to test login: 
+    {
+        "name":"userTest"
+        "email": "test@gmail.com",
+        "password": "test",
+        "birth":"1980-01-01",
+        "role":"client"
+    }

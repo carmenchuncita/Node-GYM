@@ -5,7 +5,7 @@ const createToken = (info) => {
     user_id: info._id,
     user_email: info.email,
   };
-  return jwt.sign(data, process.env.SECRET_KEY_JWT);
+  return jwt.sign(data, process.env.JWT_SECRET);
 };
 
 module.exports = { createToken };
