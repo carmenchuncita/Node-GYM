@@ -14,8 +14,11 @@ const eventSchema = new mongoose.Schema({
         required: true,
         enum: ['cardio', 'flexibility', 'force']
     }
+}, {
+    collection: 'sports'
 });
 
-const Event = mongoose.model('Event', eventSchema);
+const Sports = mongoose.model('Sports', eventSchema);
 
-module.exports = Event;
+module.exports = Sports;
+

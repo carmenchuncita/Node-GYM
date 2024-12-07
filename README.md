@@ -63,6 +63,6 @@ Node-GYM
     }
 
     5. Prueba a editar y elimitar autenticado algún evento, los pasos a seguir son los mismos que en create pero recuerda pasar el id en la ruta:
-    DELETE  http://localhost:3501/api/sports/deleteEvent/6754a1886650e62a9bfbc4a4
-    PUT     http://localhost:3501/api/sports/updateEvent/tuiddeevento
+    DELETE  http://localhost:3501/api/sports/deleteEvent/6754b2137a19e3c556c19faa
+    PUT    http://localhost:3501/api/sports/updateEvent/6754b2407a19e3c556c19fb0
     
