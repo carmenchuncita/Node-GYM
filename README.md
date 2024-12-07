@@ -53,7 +53,7 @@ Node-GYM
 
     Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
 
-    Despues ves al body para crear el evento, ten en cuenta que el type y el location están restringidos a valores concretos especificados en el modelo :
+    Despues ve al body para crear el evento, ten en cuenta que el type y el location están restringidos a valores concretos especificados en el modelo :
     {
     "name": "Cardio Workout",
     "description": "High-intensity cardio",
