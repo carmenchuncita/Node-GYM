@@ -1,6 +1,18 @@
 # Node-GYM
-Node-GYM
-1. To start the project we must previously install:
+
+Node-GYM es un proyecto basado en Node.js que permite gestionar usuarios y eventos deportivos a través de una API REST.
+
+---
+
+## Instalación
+
+Para iniciar el proyecto, sigue estos pasos:
+
+### 1. Instalar las dependencias
+
+Ejecuta los siguientes comandos para instalar todas las dependencias necesarias:
+
+```bash
 - npm install
 - npm install nodemon --save-dev
 - npm install express
@@ -11,58 +23,124 @@ Node-GYM
 - npm install multer
 - npm install cloudinary
 - npm install multer-storage-cloudinary
+```
 
-2. npm run dev
+## 2. Arranca el proyecto :
 
-3. User example to test login: 
-    {
-        "name":"userTest2",
-        "email": "test2@gmail.com",
-        "password": "test2",
-        "birth":"1980-01-01",
-        "role":"admin"
-    }
-    devolverá algo asi: 
-   {
-    "message": "Inicio de sesión exitoso",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA",
-    "user": {
-        "id": "6754869af19529736961fd09",
-        "email": "test2@gmail.com",
-        "name": "userTest2"
-    }
-   }
+```bash
+npm run dev
+```
+## 3. Ejemplo de Usuario para Pruebas de Login :
+Puedes usar el siguiente usuario para probar el inicio de sesión:
+```bash
+{
+  "name": "userTest2",
+  "email": "test2@gmail.com",
+  "password": "test2",
+  "birth": "1980-01-01",
+  "role": "admin"
+}
+```
+Al iniciar sesión con este usuario, deberías recibir una respuesta similar a la siguiente:
+```bash
+{
+  "message": "Inicio de sesión con éxito",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "6754869af19529736961fd09",
+    "email": "test2@gmail.com",
+    "name": "userTest2"
+  }
+}
+```
+## 4. Uso del Token en Thunder Client :
+Una vez obtenido el token, inclúyelo en los headers de tus solicitudes como sigue:
 
-    y despues tienes que usar ese token en los headers de thunder cliebt:
+Header:
+```bash
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+```
+ **Obtener Perfil del Usuario Autenticado**
+ - URL: http://localhost:3501/api/users/profile
+ - Método: GET
+La respuesta debería ser algo similar a esto:
+```bash
+{
+  "user": {
+    "name": "userTest2",
+    "email": "test2@gmail.com",
+    "id": "6754869af19529736961fd09"
+  }
+}
+```
+## 5. Gestión de Eventos Deportivos:
+**Requisitos**
+Para crear, editar o eliminar eventos, debes:
 
-    Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+- Ser un usuario con rol **admin**.
+- Estar autenticado con un token válido.
 
-    en el GET de http://localhost:3501/api/users/profile y devolverá alg así : 
+**Crear un Evento**
+- URL : http://localhost:3501/api/sports/createEvent
+- Método: POST
 
-   {
-    "user": {
-        "name": "userTest2",
-        "email": "test2@gmail.com",
-        "id": "6754869af19529736961fd09"
-        }
-    }
+Incluye el token en los headers:
+```bash
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+```
 
-    4. Para crear,editar o borrar eventos tienes que ser admin y logearte con autenticacion, para ello volveremos a usar el usuario test2 del que ya tenemos el token.
-    En la ruta http://localhost:3501/api/sports/createEvent con metodo POST, aplica en los headers la autenticacion :
+En el body, agrega los datos del evento. Ten en cuenta que **los campos location y type están restringidos a valores específicos**:
 
+**Restricciones del Modelo de Eventos**
+Al crear o editar un evento:
 
-    Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+- location debe ser uno de los siguientes valores:
+    - "room-1"
+    - "room-2"
+    - "room-3"
+- type debe ser uno de los siguientes valores:
+    - "cardio"
+    - "flexibility"
+    - "force"
 
-    Despues ve al body para crear el evento, ten en cuenta que el type y el location están restringidos a valores concretos especificados en el modelo :
-    {
+```bash
+{
     "name": "Cardio Workout",
     "description": "High-intensity cardio",
     "date": "2024-12-10T09:00:00.000Z",
-    "location": "room 1",
+    "location": "room-1",
     "type": "cardio"
-    }
+}
+```
 
-    5. Prueba a editar y elimitar autenticado algún evento, los pasos a seguir son los mismos que en create pero recuerda pasar el id en la ruta:
-    DELETE  http://localhost:3501/api/sports/deleteEvent/6754b2137a19e3c556c19faa
-    PUT    http://localhost:3501/api/sports/updateEvent/6754b2407a19e3c556c19fb0
-    
+**Editar un Evento**
+- URL : http://localhost:3501/api/sports/updateEvent/<eventId>
+- Método: PUT
+- Ejemplo : http://localhost:3501/api/sports/updateEvent/6754b2407a19e3c556c19fb0
+
+Incluye el token en los headers:
+```bash
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+```
+
+En el body, actualiza los datos del evento:
+
+```bash
+{
+    "name": "Advanced Cardio Workout",
+    "description": "A more challenging cardio session",
+    "date": "2024-12-12T10:00:00.000Z",
+    "location": "room-2",
+    "type": "cardio"
+}
+```
+
+**Eliminar un Evento**
+- URL : http://localhost:3501/api/sports/deleteEvent/<eventId>
+- Método: DELETE
+- Ejemplo : http://localhost:3501/api/sports/deleteEvent/6754b2137a19e3c556c19faa
+
+Incluye el token en los headers:
+```bash
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+```

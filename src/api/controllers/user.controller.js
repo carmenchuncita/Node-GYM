@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
 
       const token = createToken(user);
       res.json({
-          message: "Inicio de sesión exitoso",
+          message: "Inicio de sesión con éxito",
           token,
           user: {
               id: user._id,
