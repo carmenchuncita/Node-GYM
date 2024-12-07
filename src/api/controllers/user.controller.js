@@ -30,14 +30,5 @@ const registerUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
-  try {
-    const listUsers = await Users.find();
-    res.status(200).json({ success: true, list: listUsers });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Error al obtener los usuarios', error });
-  }
-};
 
-module.exports = { registerUser, getUsers };
+module.exports = { registerUser };
