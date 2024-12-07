@@ -22,3 +22,23 @@ Node-GYM
         "birth":"1980-01-01",
         "role":"client"
     }
+    devolverá algo asi: 
+    {
+        "message": "Inicio de sesión exitoso",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDc5NTg5Y2FiNTEzNWJlY2U3MWI2IiwidXNlcl9lbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzMzNTg5OTg1fQ.3EBy3ff1YFwxsQ5JexLPRJ--cFOSC9I8b6zZ5GPRlMI",
+        "user": {
+            "id": "675479589cab5135bece71b6",
+            "email": "test@gmail.com",
+            "name": "userTest"
+        }
+    }
+
+    y despues tienes que usar ese token en los headers en el GET de http://localhost:3501/api/users/profile y devolverá alg así : 
+    {
+        "user": {
+            "name": "userTest",
+            "email": "test@gmail.com",
+            "id": "675479589cab5135bece71b6"
+        }
+    }
+    

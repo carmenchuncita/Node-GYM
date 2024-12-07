@@ -8,4 +8,19 @@ const createToken = (info) => {
   return jwt.sign(data, process.env.JWT_SECRET);
 };
 
-module.exports = { createToken };
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; 
+
+  // No token, unauthorized
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    // Invalid token
+      if (err) return res.sendStatus(403); 
+      req.user = user;
+      next();
+  });
+}
+
+module.exports = { createToken, authenticateToken };
