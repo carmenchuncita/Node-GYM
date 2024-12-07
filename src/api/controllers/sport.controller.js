@@ -1,25 +1,25 @@
 const Event = require('../models/sport.model');
 
-// const getEvents = async (req, res) => {
-//     try {
-//         const events = await Event.find();
-//         res.json(events);
-//     } catch (error) {
-//         res.status(500).send({ message: "Error al obtener los eventos", error: error.message });
-//     }
-// };
+const getEvents = async (req, res) => {
+    try {
+        const events = await Event.find();
+        res.json(events);
+    } catch (error) {
+        res.status(500).send({ message: "Error al obtener los eventos", error: error.message });
+    }
+};
 
-// const getEventById = async (req, res) => {
-//     try {
-//         const event = await Event.findById(req.params.eventId);
-//         if (!event) {
-//             return res.status(404).send({ message: "Evento no encontrado" });
-//         }
-//         res.json(event);
-//     } catch (error) {
-//         res.status(500).send({ message: "Error al obtener el evento", error: error.message });
-//     }
-// };
+const getEventById = async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.eventId);
+        if (!event) {
+            return res.status(404).send({ message: "Evento no encontrado" });
+        }
+        res.json(event);
+    } catch (error) {
+        res.status(500).send({ message: "Error al obtener el evento", error: error.message });
+    }
+};
 
 const createEvent = async (req, res) => {
     const { name, description, date, location, type } = req.body;
@@ -58,8 +58,8 @@ const deleteEvent = async (req, res) => {
 };
 
 module.exports = {
-    // getEvents,
-    // getEventById,
+    getEvents,
+    getEventById,
     createEvent,
     updateEvent,
     deleteEvent

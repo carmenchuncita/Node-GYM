@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../../middleware/jwt-auth');  
 const {
-    // getEvents,
-    // getEventById,
+    getEvents,
+    getEventById,
     createEvent,
     updateEvent,
     deleteEvent
 } = require('../../controllers/sport.controller');
 
 
-// router.get('/getAllEvents', getEvents);
-// router.get('/events/:eventId', getEventById);
+router.get('/getAllEvents', getEvents);
+router.get('/getById/:eventId', getEventById);
 //protected by authentication and only accessible to admin
 router.post('/createEvent', authenticateToken, createEvent);
 //protected by authentication and only accessible to admin
