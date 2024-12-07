@@ -16,29 +16,49 @@ Node-GYM
 
 3. User example to test login: 
     {
-        "name":"userTest"
-        "email": "test@gmail.com",
-        "password": "test",
+        "name":"userTest2",
+        "email": "test2@gmail.com",
+        "password": "test2",
         "birth":"1980-01-01",
-        "role":"client"
+        "role":"admin"
     }
     devolverá algo asi: 
-    {
-        "message": "Inicio de sesión exitoso",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDc5NTg5Y2FiNTEzNWJlY2U3MWI2IiwidXNlcl9lbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzMzNTg5OTg1fQ.3EBy3ff1YFwxsQ5JexLPRJ--cFOSC9I8b6zZ5GPRlMI",
-        "user": {
-            "id": "675479589cab5135bece71b6",
-            "email": "test@gmail.com",
-            "name": "userTest"
+   {
+    "message": "Inicio de sesión exitoso",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA",
+    "user": {
+        "id": "6754869af19529736961fd09",
+        "email": "test2@gmail.com",
+        "name": "userTest2"
+    }
+   }
+
+    y despues tienes que usar ese token en los headers de thunder cliebt:
+
+    Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+
+    en el GET de http://localhost:3501/api/users/profile y devolverá alg así : 
+
+   {
+    "user": {
+        "name": "userTest2",
+        "email": "test2@gmail.com",
+        "id": "6754869af19529736961fd09"
         }
     }
 
-    y despues tienes que usar ese token en los headers en el GET de http://localhost:3501/api/users/profile y devolverá alg así : 
+    4. Para crear,editar o borrar eventos tienes que ser admin y logearte con autenticacion, para ello volveremos a usar el usuario test2 del que ya tenemos el token.
+    En la ruta http://localhost:3501/api/sports/createEvent con metodo POST, aplica en los headers la autenticacion :
+
+
+    Authorization   Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+
+    Despues ves al body para crear el evento, ten en cuenta que el type y el location están restringidos a valores concretos especificados en el modelo :
     {
-        "user": {
-            "name": "userTest",
-            "email": "test@gmail.com",
-            "id": "675479589cab5135bece71b6"
-        }
+    "name": "Cardio Workout",
+    "description": "High-intensity cardio",
+    "date": "2024-12-10T09:00:00.000Z",
+    "location": "room 1",
+    "type": "cardio"
     }
     

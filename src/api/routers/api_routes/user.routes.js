@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const encryptPassword = require('../../middleware/encryptPassword');
-const { authenticateToken } = require('../../../utils/jwt'); 
+const { authenticateToken } = require('../../middleware/jwt-auth'); 
 const {
   registerUser,
   loginUser,
