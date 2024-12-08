@@ -74,4 +74,38 @@ const profileUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser,loginUser, profileUser };
+const updateOrRegisterUser = async (req, res) => {
+  const { email, name, password } = req.body;
+
+  if (!email || !name || !password) {
+    return res.status(400).json({ message: 'Email, nombre y contraseña son obligatorios.' });
+  }
+
+  try {
+    let user = await Users.findOne({ email });
+
+    if (user) {
+    
+      user.image = req.file?.path || user.image;
+      const updatedUser = await user.save();
+      res.status(200).json({ message: 'Usuario actualizado correctamente.', user: updatedUser });
+    } else {
+  
+      const newUser = new Users({
+        name,
+        email,
+        password, 
+        image: req.file?.path || ''
+      });
+
+      const createdUser = await newUser.save();
+      res.status(201).json({ message: 'Usuario creado correctamente.', user: createdUser });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error al procesar la solicitud', error: error.message });
+  }
+};
+
+
+
+module.exports = { registerUser,loginUser, profileUser,updateOrRegisterUser };
