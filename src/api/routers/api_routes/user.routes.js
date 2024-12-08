@@ -15,7 +15,6 @@ router.post('/register', encryptPassword, registerUser);
 router.post('/login', loginUser);
 // We use authenticateToken to ensure it is a logged in user
 router.get('/profile', authenticateToken, profileUser);
-
 // Route to upload profile´s image
 router.post('/uploadFile', upload.single('image'), updateOrRegisterUser);
 

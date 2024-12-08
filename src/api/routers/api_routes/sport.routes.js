@@ -16,11 +16,11 @@ const {
 router.get('/getAllEvents', getEvents);
 router.get('/getById/:eventId', getEventById);
 //protected by authentication and only accessible to admin
-router.post('/createEvent', authenticateToken, roleCheck('admin'), createEvent)
+router.post('/createEvent', authenticateToken,roleCheck('admin'), createEvent)
 //protected by authentication and only accessible to admin
-router.put('/updateEvent/:eventId', authenticateToken, roleCheck('admin'), updateEvent);
+router.put('/updateEvent/:eventId', authenticateToken,roleCheck('admin'), updateEvent);
 //protected by authentication and only accessible to admin
-router.delete('/deleteEvent/:eventId', authenticateToken, roleCheck('admin'), deleteEvent);
+router.delete('/deleteEvent/:eventId', authenticateToken,roleCheck('admin'), deleteEvent);
 
 //Advanced routes
 router.get('/events/upcoming', getUpcomingEvents)
