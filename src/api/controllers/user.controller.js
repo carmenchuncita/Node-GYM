@@ -67,7 +67,7 @@ const profileUser = async (req, res) => {
       const user = await Users.findById(req.user.user_id);
       if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-      res.json({ user: { name: user.name, email: user.email, id: user._id } });
+      res.json({ user: { name: user.name, email: user.email, id: user._id, role:user.role} });
   } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error al recuperar la información del usuario", error });

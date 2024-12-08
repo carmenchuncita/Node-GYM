@@ -13,7 +13,9 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     image: { type: String, default: '' },
     birth: { type: Date },
-    role: { type: String, enum: ['admin', 'client'], default: 'client' },
+    role: { type: String,
+      enum: ['admin', 'client'], 
+      default: 'client' },
   },
   {
     collection: 'users',

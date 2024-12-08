@@ -32,24 +32,25 @@ npm run dev
 ```
 ## 3. Ejemplo de Usuario para Pruebas de Login :
 Puedes usar el siguiente usuario para probar el inicio de sesión:
+URL: http://localhost:3501/api/users/login
+Método:POST
+
 ```bash
-{
-  "name": "userTest2",
-  "email": "test2@gmail.com",
-  "password": "test2",
-  "birth": "1980-01-01",
-  "role": "admin"
+
+ {
+  "email": "test3@example.com",
+  "password": "test3"
 }
 ```
 Al iniciar sesión con este usuario, deberías recibir una respuesta similar a la siguiente:
 ```bash
 {
   "message": "Inicio de sesión con éxito",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NWJjNTdmYWVhM2IyNzU4ZGY1MWI2IiwidXNlcl9lbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjcyMTkyfQ.WqJQozEp_DbLejA1CEUm4wzJaA7Kjj31rmP-gZkB2NU",
   "user": {
-    "id": "6754869af19529736961fd09",
-    "email": "test2@gmail.com",
-    "name": "userTest2"
+    "id": "6755bc57faea3b2758df51b6",
+    "email": "test3@example.com",
+    "name": "test3"
   }
 }
 ```
@@ -58,7 +59,7 @@ Una vez obtenido el token, inclúyelo en los headers de tus solicitudes:
 
 Header:
 ```bash
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NWJjNTdmYWVhM2IyNzU4ZGY1MWI2IiwidXNlcl9lbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjcyMTkyfQ.WqJQozEp_DbLejA1CEUm4wzJaA7Kjj31rmP-gZkB2NU
 ```
  **Obtener Perfil del Usuario Autenticado**
  - URL: http://localhost:3501/api/users/profile
@@ -67,9 +68,10 @@ La respuesta debería ser algo similar a esto:
 ```bash
 {
   "user": {
-    "name": "userTest2",
-    "email": "test2@gmail.com",
-    "id": "6754869af19529736961fd09"
+    "name": "test3",
+    "email": "test3@example.com",
+    "id": "6755bc57faea3b2758df51b6",
+    "role": "admin"
   }
 }
 ```
@@ -86,7 +88,7 @@ Para crear, editar o eliminar eventos, debes:
 
 Incluye el token en los headers:
 ```bash
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NWJjNTdmYWVhM2IyNzU4ZGY1MWI2IiwidXNlcl9lbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjcyMTkyfQ.WqJQozEp_DbLejA1CEUm4wzJaA7Kjj31rmP-gZkB2NU
 ```
 
 En el body, agrega los datos del evento. Ten en cuenta que **los campos location y type están restringidos a valores específicos**:
@@ -116,11 +118,11 @@ Al crear o editar un evento:
 **Editar un Evento**
 - URL : http://localhost:3501/api/sports/updateEvent/<eventId>
 - Método: PUT
-- Ejemplo : http://localhost:3501/api/sports/updateEvent/6754b2407a19e3c556c19fb0
+- Ejemplo : http://localhost:3501/api/sports/updateEvent/6754b2277a19e3c556c19fac
 
 Incluye el token en los headers:
 ```bash
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NWJjNTdmYWVhM2IyNzU4ZGY1MWI2IiwidXNlcl9lbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjcyMTkyfQ.WqJQozEp_DbLejA1CEUm4wzJaA7Kjj31rmP-gZkB2NU
 ```
 
 En el body, actualiza los datos del evento:
@@ -142,7 +144,7 @@ En el body, actualiza los datos del evento:
 
 Incluye el token en los headers:
 ```bash
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
+Authorization: Bearer Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NWJjNTdmYWVhM2IyNzU4ZGY1MWI2IiwidXNlcl9lbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjcyMTkyfQ.WqJQozEp_DbLejA1CEUm4wzJaA7Kjj31rmP-gZkB2NU
 ```
 **Todos Eventos**
 - URL: http://localhost:3501/api/sports/getAllEvents
