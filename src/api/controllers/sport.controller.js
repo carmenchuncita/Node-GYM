@@ -1,8 +1,8 @@
-const Event = require('../models/sport.model');
+const Sports = require('../models/sport.model');
 
 const getEvents = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Sports.find(); 
         res.json(events);
     } catch (error) {
         res.status(500).send({ message: "Error al obtener los eventos", error: error.message });
@@ -11,7 +11,7 @@ const getEvents = async (req, res) => {
 
 const getEventById = async (req, res) => {
     try {
-        const event = await Event.findById(req.params.eventId);
+        const event = await Sports.findById(req.params.eventId);
         if (!event) {
             return res.status(404).send({ message: "Evento no encontrado" });
         }
@@ -24,7 +24,7 @@ const getEventById = async (req, res) => {
 const createEvent = async (req, res) => {
     const { name, description, date, location, type } = req.body;
     try {
-        const newEvent = new Event({ name, description, date, location, type });
+        const newEvent = new Sports({ name, description, date, location, type }); 
         await newEvent.save();
         res.status(201).send({ message: "Evento creado con éxito", event: newEvent });
     } catch (error) {
@@ -35,7 +35,11 @@ const createEvent = async (req, res) => {
 const updateEvent = async (req, res) => {
     const { name, description, date, location, type } = req.body;
     try {
-        const event = await Event.findByIdAndUpdate(req.params.eventId, { name, description, date, location, type }, { new: true });
+        const event = await Sports.findByIdAndUpdate(
+            req.params.eventId,
+            { name, description, date, location, type }, 
+            { new: true }
+        );
         if (!event) {
             return res.status(404).send({ message: "Evento no encontrado" });
         }
@@ -47,7 +51,7 @@ const updateEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
     try {
-        const event = await Event.findByIdAndDelete(req.params.eventId);
+        const event = await Sports.findByIdAndDelete(req.params.eventId);
         if (!event) {
             return res.status(404).send({ message: "Evento no encontrado" });
         }
@@ -57,10 +61,65 @@ const deleteEvent = async (req, res) => {
     }
 };
 
+// Advanced
+const getUpcomingEvents = async (req, res) => {
+    try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7); 
+
+        const events = await Sports.find({
+            date: { $gte: today, $lte: nextWeek }
+        }).sort({ date: 1 });
+
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).send({ message: "Error al obtener eventos de la próxima semana", error: error.message });
+    }
+};
+
+const getEventsByType = async (req, res) => {
+    try {
+        const { type } = req.query;
+
+        if (!type) {
+            return res.status(400).send({ message: "El parámetro 'type' es requerido" });
+        }
+
+        const events = await Sports.find({ type });
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).send({ message: "Error al filtrar eventos por tipo", error: error.message });
+    }
+};
+
+const getEventsByDateRange = async (req, res) => {
+    try {
+        const { from, to } = req.query;
+
+        if (!from || !to) {
+            return res.status(400).send({ message: "Los parámetros 'from' y 'to' son requeridos" });
+        }
+
+        const events = await Sports.find({
+            date: { $gte: new Date(from), $lte: new Date(to) }
+        }).sort({ date: 1 });
+
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).send({ message: "Error al filtrar eventos por rango de fechas", error: error.message });
+    }
+};
+    
 module.exports = {
     getEvents,
     getEventById,
     createEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    getUpcomingEvents,
+    getEventsByType,
+    getEventsByDateRange
 };

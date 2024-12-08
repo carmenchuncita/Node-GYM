@@ -54,7 +54,7 @@ Al iniciar sesión con este usuario, deberías recibir una respuesta similar a l
 }
 ```
 ## 4. Uso del Token en Thunder Client :
-Una vez obtenido el token, inclúyelo en los headers de tus solicitudes como sigue:
+Una vez obtenido el token, inclúyelo en los headers de tus solicitudes:
 
 Header:
 ```bash
@@ -138,9 +138,36 @@ En el body, actualiza los datos del evento:
 **Eliminar un Evento**
 - URL : http://localhost:3501/api/sports/deleteEvent/<eventId>
 - Método: DELETE
-- Ejemplo : http://localhost:3501/api/sports/deleteEvent/6754b2137a19e3c556c19faa
+- Ejemplo : http://localhost:3501/api/sports/deleteEvent/6754b2277a19e3c556c19fac
 
 Incluye el token en los headers:
 ```bash
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDg2OWFmMTk1Mjk3MzY5NjFmZDA5IiwidXNlcl9lbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTczMzU5MjgwOH0.vTGewbWecknQ_vT-4y07GEAeBnv9FamtxxyYMCPakWA
 ```
+**Todos Eventos**
+- URL : http://localhost:3501/api/sports/getAllEvents
+- Método: GET
+
+**Eventos byId**
+- URL : http://localhost:3501/api/sports/getById/<_id>
+- Método: GET
+- Ejemplo : http://localhost:3501/api/sports/getById/6754b2277a19e3c556c19fac
+
+**Próximos Eventos**
+- URL : http://localhost:3501/api/sports/events/upcoming
+- Método: GET
+- Ejemplo : http://localhost:3501/api/sports/events/upcoming
+
+**Eventos por tipo**
+- URL : http://localhost:3501/api/sports/events?type=<typeEvent>
+- Método: 
+- Ejemplo: http://localhost:3501/api/sports/events?type=cardio
+
+**Eventos por Fechas**
+- URL : http://localhost:3501/api/sports/events/date?from=<fecha1>&to=<fecha2>
+- Método: GET
+- Ejemplo : http://localhost:3501/api/sports/events/date?from=2024-12-10&to=2024-12-20
+
+
+
+
